@@ -5,6 +5,8 @@
 #include "Drawable.h"
 #include "Camera.h"
 #include "Light.h"
+#include "Vertex.h"
+#include <stdlib.h>
 #include <string>
 #include <vector>
 
@@ -18,6 +20,7 @@ public:
 	Circle(vec4 _rgba);
 	~Circle();
 	void init();
+	vec4 randColor();
 	void draw(Camera, vector<Light>);
 	
 private:

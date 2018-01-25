@@ -7,6 +7,7 @@
 #include "Camera.h"  //for camera objects (for use in future assignments)
 #include "Light.h"	//for lights (for use in future assignments)
 #include "Square.h"  //blue box object!!
+#include "Triangle.h"  //blue box object!!
 #include "Circle.h"  //blue box object!!
 
 //Forward declarations
@@ -19,6 +20,7 @@ void close(void);
 //Objects
 Square* mbox;
 Circle* mcircle;
+Triangle* mtri;
 Camera cam;
 vector<Light> lights;
 vector<Drawable*>drawables;
@@ -37,9 +39,9 @@ int main(int argc, char **argv)
 #else
 	glutInitDisplayMode(GLUT_RGBA | GLUT_SINGLE);
 #endif
-	glutInitWindowSize(512, 512);
+	glutInitWindowSize(500, 500);
 
-	windowID = glutCreateWindow("CS 432 Hello World");
+	windowID = glutCreateWindow("CS 432 HW1");
 
 	//print out info about our system.  Must be done after creating a usage of GL, via glut
 	fprintf(stdout, "OpenGL Version: %s\n", glGetString(GL_VERSION));
@@ -74,7 +76,9 @@ void init()
 
 	mbox = new Square(vec4(1.0, 0.0, 0.0, 1.0));
 	mcircle = new Circle();
+	mtri = new Triangle();
 	drawables.push_back(mbox);
+	drawables.push_back(mtri);
 	drawables.push_back(mcircle);
 
 }

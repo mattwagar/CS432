@@ -19,7 +19,9 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="mat.h" />
     <ClInclude Include="Square.h" />
+    <ClInclude Include="Triangle.h" />
     <ClInclude Include="vec.h" />
+    <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
@@ -28,6 +30,8 @@
     <ClCompile Include="InitShader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Square.cpp" />
+    <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fshader00_v150.glsl" />
