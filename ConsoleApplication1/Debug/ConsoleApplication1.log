@@ -1,0 +1,83 @@
+﻿Build started 1/24/2018 11:15:11 PM.
+     1>Project "C:\Users\Matt\Documents\GitHub\CS432\ConsoleApplication1\ConsoleApplication1.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W4 /WX- /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D WIN32 /D _DEBUG /D _CONSOLE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp Circle.cpp Drawable.cpp InitShader.cpp main.cpp Square.cpp
+         Square.cpp
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(588): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(778): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(785): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(792): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(800): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\square.cpp(53): warning C4100: 'cam' : unreferenced formal parameter
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(623): warning C4505: 'glutInit_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(625): warning C4505: 'glutCreateWindow_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(627): warning C4505: 'glutCreateMenu_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\checkerror.h(38): warning C4505: '_CheckError' : unreferenced local function has been removed
+         main.cpp
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(588): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(778): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(785): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(792): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(800): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\main.cpp(95): warning C4100: 'y' : unreferenced formal parameter
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\main.cpp(95): warning C4100: 'x' : unreferenced formal parameter
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(627): warning C4505: 'glutCreateMenu_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\checkerror.h(38): warning C4505: '_CheckError' : unreferenced local function has been removed
+         InitShader.cpp
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(588): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(778): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(785): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(792): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(800): warning C4127: conditional expression is constant
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(623): warning C4505: 'glutInit_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(625): warning C4505: 'glutCreateWindow_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(627): warning C4505: 'glutCreateMenu_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\checkerror.h(38): warning C4505: '_CheckError' : unreferenced local function has been removed
+         Drawable.cpp
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(588): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(778): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(785): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(792): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(800): warning C4127: conditional expression is constant
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(623): warning C4505: 'glutInit_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(625): warning C4505: 'glutCreateWindow_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(627): warning C4505: 'glutCreateMenu_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\checkerror.h(38): warning C4505: '_CheckError' : unreferenced local function has been removed
+         Circle.cpp
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(588): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(778): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(785): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(792): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(800): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\circle.cpp(35): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\circle.cpp(39): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\circle.cpp(40): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\circle.cpp(70): warning C4100: 'cam' : unreferenced formal parameter
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(623): warning C4505: 'glutInit_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(625): warning C4505: 'glutCreateWindow_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(627): warning C4505: 'glutCreateMenu_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\checkerror.h(38): warning C4505: '_CheckError' : unreferenced local function has been removed
+         Camera.cpp
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(588): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(778): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(785): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(792): warning C4127: conditional expression is constant
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(800): warning C4127: conditional expression is constant
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(623): warning C4505: 'glutInit_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(625): warning C4505: 'glutCreateWindow_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(627): warning C4505: 'glutCreateMenu_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\checkerror.h(38): warning C4505: '_CheckError' : unreferenced local function has been removed
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Matt\Documents\GitHub\CS432\Debug\ConsoleApplication1.exe" /INCREMENTAL /NOLOGO glew32.lib freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Matt\Documents\GitHub\CS432\Debug\ConsoleApplication1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Matt\Documents\GitHub\CS432\Debug\ConsoleApplication1.lib" /MACHINE:X86 Debug\Camera.obj
+         Debug\Circle.obj
+         Debug\Drawable.obj
+         Debug\InitShader.obj
+         Debug\main.obj
+         Debug\Square.obj
+         ConsoleApplication1.vcxproj -> C:\Users\Matt\Documents\GitHub\CS432\Debug\ConsoleApplication1.exe
+     1>Done Building Project "C:\Users\Matt\Documents\GitHub\CS432\ConsoleApplication1\ConsoleApplication1.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:07.91
