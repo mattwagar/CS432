@@ -1,2 +1,12 @@
 
+Debug/
 *.opensdf
+*.sdf
+*.log
+*.tlog
+*.obj
+*.idb
+*.pdb
+*.exe
+*.ilk
+*.pdb
