@@ -14,6 +14,7 @@
 void init(void);
 void display(void);
 void keyboard(unsigned char, int, int);
+void keyboardup(unsigned char, int, int);
 void mouse(GLint button, GLint state, GLint x, GLint y);
 void timerCallback(int value);
 void resize(int width, int height);
@@ -26,6 +27,7 @@ Triangle* mtri;
 Camera cam;
 vector<Light> lights;
 vector<Drawable*>drawables;
+bool animate = false;
 
 GLuint windowID=0;
 //----------------------------------------------------------------------------
@@ -64,6 +66,7 @@ int main(int argc, char **argv)
 	//set up the callback functions
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyboard);
+	glutKeyboardUpFunc(keyboardup);
 	glutMouseFunc(mouse);
 	glutTimerFunc(50, timerCallback, 0);
 	glutWMCloseFunc(close);
@@ -107,6 +110,20 @@ void keyboard( unsigned char key, int x, int y )
 	case 'q': case 'Q':
 		close();
 	    break;
+	case ' ':
+		animate = true;
+		cout << "ANIMATE:" << animate << "\n";
+		break;
+    }
+}
+void keyboardup( unsigned char key, int x, int y )
+{
+    switch( key ) {
+	case 033:  // Escape key
+	case ' ':
+		animate = false;
+		cout << "ANIMATE:" << animate << "\n";
+		break;
     }
 }
 
@@ -133,9 +150,10 @@ void mouse(GLint button, GLint state, GLint x, GLint y)
 
 void timerCallback(int value)
 {
-	cout << "drawables.size() = " << drawables.size() << "\n";
-	for (unsigned int i = 0; i < drawables.size(); i++){
-		drawables[i]->rotate();	
+	if(animate){
+		for (unsigned int i = 0; i < drawables.size(); i++){
+			drawables[i]->rotate();	
+		}	
 	}
 	glutTimerFunc(50, timerCallback, value);
 	glutPostRedisplay();

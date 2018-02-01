@@ -34,6 +34,7 @@ private:
 	vec3 pos3; 
 	vec3 pos4;
 	vec4 vRgba;
+	GLuint model_matrix;
 	GLuint vPosition;
 	GLuint vColor;
 };

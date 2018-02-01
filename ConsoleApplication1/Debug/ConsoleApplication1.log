@@ -1,21 +1,18 @@
-﻿Build started 2/1/2018 2:13:38 AM.
+﻿Build started 2/1/2018 11:52:28 AM.
      1>Project "C:\Users\Matt\Documents\GitHub\CS432\ConsoleApplication1\ConsoleApplication1.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W4 /WX- /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D WIN32 /D _DEBUG /D _CONSOLE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
-         main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W4 /WX- /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D WIN32 /D _DEBUG /D _CONSOLE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Square.cpp
+         Square.cpp
      1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(588): warning C4127: conditional expression is constant
      1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(778): warning C4127: conditional expression is constant
      1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(785): warning C4127: conditional expression is constant
      1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(792): warning C4127: conditional expression is constant
      1>c:\users\matt\documents\github\cs432\consoleapplication1\mat.h(800): warning C4127: conditional expression is constant
-     1>c:\users\matt\documents\github\cs432\consoleapplication1\main.cpp(103): warning C4100: 'y' : unreferenced formal parameter
-     1>c:\users\matt\documents\github\cs432\consoleapplication1\main.cpp(103): warning C4100: 'x' : unreferenced formal parameter
-     1>c:\users\matt\documents\github\cs432\consoleapplication1\main.cpp(117): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\matt\documents\github\cs432\consoleapplication1\main.cpp(118): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\matt\documents\github\cs432\consoleapplication1\main.cpp(119): warning C4305: 'initializing' : truncation from 'double' to 'float'
-     1>c:\users\matt\documents\github\cs432\consoleapplication1\main.cpp(125): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\matt\documents\github\cs432\consoleapplication1\main.cpp(126): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\matt\documents\github\cs432\consoleapplication1\main.cpp(127): warning C4305: 'initializing' : truncation from 'double' to 'float'
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\square.cpp(89): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\square.cpp(82): warning C4100: 'cam' : unreferenced formal parameter
+     1>c:\users\matt\documents\github\cs432\consoleapplication1\square.cpp(117): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(623): warning C4505: 'glutInit_ATEXIT_HACK' : unreferenced local function has been removed
+     1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(625): warning C4505: 'glutCreateWindow_ATEXIT_HACK' : unreferenced local function has been removed
      1>c:\program files (x86)\microsoft visual studio 11.0\vc\include\gl\freeglut_std.h(627): warning C4505: 'glutCreateMenu_ATEXIT_HACK' : unreferenced local function has been removed
      1>c:\users\matt\documents\github\cs432\consoleapplication1\checkerror.h(38): warning C4505: '_CheckError' : unreferenced local function has been removed
        Link:

@@ -89,20 +89,39 @@ void Triangle::draw(Camera cam, vector<Light> lights){
 }
 
 void Triangle::rotate(){
+	
+
+	cout << "THETA:" << theta << "\n";
 	theta++;
 	if(theta > 360) theta = 0;
 
 	float rangle = theta*2.0*3.14 / 360;
 	float c = cos(rangle);
 	float s = sin(rangle);
+	mat3 itrans = mat3( vec3(1, 0, (vertices[0].position.x + vertices[2].position.x)/-2),
+					   vec3(0, 1, (vertices[0].position.y + vertices[1].position.y)/-2),
+					   vec3(0, 0, 1));
+
 	mat3 rot = mat3( vec3(c, -s, 0),
 					 vec3(s, c, 0),
 					 vec3(0, 0, 1));
 
-	for (unsigned int i = 0; i < NumVertices; i++)
-	vertices[i].position = rot*vertices[i].position;
-	//put the data on the VBO
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 4, &vertices[0], GL_STATIC_DRAW);
+	mat3 trans = mat3( vec3(1, 0, (vertices[0].position.x + vertices[2].position.x)/2),
+					   vec3(0, 1, (vertices[0].position.y + vertices[1].position.y)/2),
+					   vec3(0, 0, 1));
 
+	vector<Vertex> verts = vertices;
+
+	for (unsigned int i = 0; i < NumVertices; i++)
+	verts[i].position = trans*rot*itrans*verts[i].position;
+	//put the data on the VBO
+
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);  //associate the VBO with the active VAO
+	glUseProgram(program);
+
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 4, &verts[0], GL_DYNAMIC_DRAW);
+
+	//glDrawArrays(GL_TRIANGLE_FAN, 0, NumVertices);
 }
 

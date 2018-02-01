@@ -58,7 +58,7 @@ void Square::init(){
 	//put the data on the VBO
 	//glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
 	
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 4, &vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 4, &vertices[0], GL_DYNAMIC_DRAW);
 
 	//Now let's set up the shaders!!
 	// Load shaders
@@ -85,6 +85,17 @@ void Square::draw(Camera cam, vector<Light> lights){
 	//and the attributes links to the shader
 	glBindVertexArray(VAO); 
 	glUseProgram(program);  //also switch to using this shader program
+	
+	float rangle = theta*2.0*3.14 / 360;
+	float c = cos(rangle);
+	float s = sin(rangle);
+
+	mat3 rot = mat3( vec3(c, -s, 0),
+					 vec3(s, c, 0),
+					 vec3(0, 0, 1));
+
+	assert((model_matrix = glGetUniformLocation(program, "model_matrix"))!=-1);
+	glUniformMatrix3fv(model_matrix,1, GL_TRUE,rot);
 
 	//unfortunately, every time we draw we still need to set again all uniform variables
 	//vec4 rgba = vec4(0.0, 0.0, 1.0, 1.0);// RGBA colors
@@ -97,8 +108,10 @@ void Square::draw(Camera cam, vector<Light> lights){
 }
 
 void Square::rotate(){
+	
+
 	cout << "THETA:" << theta << "\n";
-	theta++;
+	theta+=1;
 	if(theta > 360) theta = 0;
 
 	float rangle = theta*2.0*3.14 / 360;
@@ -118,9 +131,20 @@ void Square::rotate(){
 
 	vector<Vertex> verts = vertices;
 
-	for (unsigned int i = 0; i < NumVertices; i++)
-	verts[i].position = trans*rot*itrans*verts[i].position;
-	//put the data on the VBO
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 4, &verts[0], GL_STATIC_DRAW);
+	assert((model_matrix = glGetUniformLocation(program, "model_matrix"))!=-1);
+	glUniformMatrix3fv(model_matrix,1, GL_TRUE,rot);
 
+	for (unsigned int i = 0; i < NumVertices; i++){
+		verts[i].color = verts[i].color * abs(c);
+		//verts[i].position = trans*rot*itrans*verts[i].position;
+	}
+	//put the data on the VBO
+
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);  //associate the VBO with the active VAO
+	glUseProgram(program);
+
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 4, &verts[0], GL_DYNAMIC_DRAW);
+
+	//glDrawArrays(GL_TRIANGLE_FAN, 0, NumVertices);
 }
