@@ -15,11 +15,14 @@ protected:
 	GLuint VBO;
 	mat4 modelmatrix;
 	
+	
 public:
+	unsigned int theta;
 	virtual void draw(Camera, vector<Light>)=0;
 	void setModelMatrix(mat4 mm) { modelmatrix = mm; }
 	static unsigned char* ppmRead(char* filename, int* width, int* height);
 	virtual ~Drawable()=0;
+	virtual void rotate()=0;
 };
 
 #endif

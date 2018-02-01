@@ -8,11 +8,10 @@ class Vertex{
 
 public:	
 	Vertex();
-	Vertex(vec2 _position, vec4 _color);
-
-private:	
-	vec2 position;
+	Vertex(vec3 _position, vec4 _color);
+	vec3 position;
 	vec4 color;
+	
 	
 };
 

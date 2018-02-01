@@ -17,14 +17,19 @@ class Triangle: public Drawable{
 public:	
 	Triangle();
 	Triangle(vec4 _rgba);
-	Triangle(vec4 _rgba, vec2 pos1, vec2 pos2, vec2 pos3);
+	Triangle(vec4 _rgba, vec3 pos1, vec3 pos2, vec3 pos3);
 	~Triangle();
 	void init();
-	void init(vec2 pos1, vec2 pos2, vec2 pos3);
 	void draw(Camera, vector<Light>);
+	void rotate();
 	
 private:
-	static const int NumVertices = 4;
+	static const int NumVertices = 3;
+	unsigned int theta;
+	vector<Vertex> vertices;
+	vec3 pos1; 
+	vec3 pos2; 
+	vec3 pos3; 
 	vec4 vRgba;
 	GLuint vPosition;
 	GLuint vColor;

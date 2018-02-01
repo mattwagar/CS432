@@ -31,7 +31,7 @@ void Circle::init(){
 
 	vector<Vertex> verts(NumVertices);
 
-	verts[0] = Vertex(vec2(0,0), randColor()); 
+	verts[0] = Vertex(vec3(0,0,1), randColor()); 
 	float angle = NumVertices-1 == 0 ? 360 : 360 / (NumVertices-1);
 	cout << "\nangle: " << angle << "\n";
 	for(int i = 1; i < NumVertices; i++){
@@ -42,8 +42,7 @@ void Circle::init(){
 		x = abs(x) <= 1e-004 ? 0 : x; 
 		y = abs(y) <= 1e-004 ? 0 : y; 
 		
-		verts[i] = Vertex(vec2(x,y), randColor());
-		cout <<		vec2(x,y) << "\n";
+		verts[i] = Vertex(vec3(x,y,1), randColor());
 	}
 	verts.push_back(verts[1]);
 	NumVertices++;

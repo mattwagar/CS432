@@ -14,6 +14,8 @@
 void init(void);
 void display(void);
 void keyboard(unsigned char, int, int);
+void mouse(GLint button, GLint state, GLint x, GLint y);
+void timerCallback(int value);
 void resize(int width, int height);
 void close(void);
 
@@ -62,6 +64,8 @@ int main(int argc, char **argv)
 	//set up the callback functions
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyboard);
+	glutMouseFunc(mouse);
+	glutTimerFunc(50, timerCallback, 0);
 	glutWMCloseFunc(close);
 
 	//start the main event listening loop
@@ -74,12 +78,12 @@ void init()
 {
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 
-	mbox = new Square(vec4(1.0, 0.0, 0.0, 1.0));
-	mcircle = new Circle();
-	mtri = new Triangle();
-	drawables.push_back(mbox);
-	drawables.push_back(mtri);
-	drawables.push_back(mcircle);
+	//mbox = new Square(vec4(1.0, 0.0, 0.0, 1.0));
+	//mcircle = new Circle();
+	//mtri = new Triangle();
+	//drawables.push_back(mbox);
+	//drawables.push_back(mtri);
+	//drawables.push_back(mcircle);
 
 }
 
@@ -105,6 +109,39 @@ void keyboard( unsigned char key, int x, int y )
 	    break;
     }
 }
+
+void mouse(GLint button, GLint state, GLint x, GLint y)
+{
+	if(button == GLUT_LEFT_BUTTON && state == GLUT_UP){ //left up
+		cout << "LEFT UP (" << x <<"," << y<< ")\n";
+		float x_pos = ((float)x*2.0/500.0)-1;
+		float y_pos = (((float)y*2.0/500.0)-1) * -1;
+		float size = 0.2;
+		drawables.push_back(new Square(vec4(1.0, 0.0, 0.0, 1.0), vec3(x_pos-size, y_pos-size, 1), vec3(x_pos+size, y_pos-size, 1), vec3(x_pos+size, y_pos+size, 1), vec3(x_pos-size, y_pos+size, 1)));
+	} else if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){ //left down
+		//cout << "LEFT DOWN\n";
+	} else if(button == GLUT_RIGHT_BUTTON && state == GLUT_UP){ //right up
+		cout << "RIGHT UP\n";
+		float x_pos = ((float)x*2.0/500.0)-1;
+		float y_pos = (((float)y*2.0/500.0)-1) * -1;
+		float size = 0.2;
+		drawables.push_back(new Triangle(vec4(0.0, 0.0, 1.0, 1.0), vec3(x_pos-size*2, y_pos-size, 1), vec3(x_pos, y_pos+size, 1), vec3(x_pos+size*2, y_pos-size, 1)));
+	} else if(button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN){ //left down
+		//cout << "RIGHT DOWN\n";
+	}
+}
+
+void timerCallback(int value)
+{
+	cout << "drawables.size() = " << drawables.size() << "\n";
+	for (unsigned int i = 0; i < drawables.size(); i++){
+		drawables[i]->rotate();	
+	}
+	glutTimerFunc(50, timerCallback, value);
+	glutPostRedisplay();
+}
+
+
 
 //----------------------------------------------------------------------------
 //Window resize callback
