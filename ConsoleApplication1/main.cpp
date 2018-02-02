@@ -9,16 +9,20 @@
 #include "Square.h"  //blue box object!!
 #include "Triangle.h"  //blue box object!!
 #include "Circle.h"  //blue box object!!
+#include <stdlib.h>
 
 //Forward declarations
 void init(void);
 void display(void);
 void keyboard(unsigned char, int, int);
 void keyboardup(unsigned char, int, int);
+void keypressSpecial(int key, int x, int y);
+void keypressSpecialUp(int key, int x, int y);
 void mouse(GLint button, GLint state, GLint x, GLint y);
 void timerCallback(int value);
 void resize(int width, int height);
 void close(void);
+
 
 //Objects
 Square* mbox;
@@ -28,6 +32,7 @@ Camera cam;
 vector<Light> lights;
 vector<Drawable*>drawables;
 bool animate = false;
+bool shift = false;
 
 GLuint windowID=0;
 //----------------------------------------------------------------------------
@@ -67,6 +72,8 @@ int main(int argc, char **argv)
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyboard);
 	glutKeyboardUpFunc(keyboardup);
+	glutSpecialFunc(keypressSpecial);
+	glutSpecialUpFunc(keypressSpecialUp);
 	glutMouseFunc(mouse);
 	glutTimerFunc(50, timerCallback, 0);
 	glutWMCloseFunc(close);
@@ -112,7 +119,6 @@ void keyboard( unsigned char key, int x, int y )
 	    break;
 	case ' ':
 		animate = true;
-		cout << "ANIMATE:" << animate << "\n";
 		break;
     }
 }
@@ -122,40 +128,65 @@ void keyboardup( unsigned char key, int x, int y )
 	case 033:  // Escape key
 	case ' ':
 		animate = false;
-		cout << "ANIMATE:" << animate << "\n";
 		break;
     }
 }
 
+void keypressSpecial(int key, int x, int y){
+	glutSetKeyRepeat(0);
+
+	if (key== GLUT_KEY_SHIFT_L || key== GLUT_KEY_SHIFT_R){
+		shift = true;
+	}
+}
+void keypressSpecialUp(int key, int x, int y){
+	glutSetKeyRepeat(0);
+
+	if (key== GLUT_KEY_SHIFT_L || key== GLUT_KEY_SHIFT_R){
+		shift = false;
+	}
+}
+
 void mouse(GLint button, GLint state, GLint x, GLint y)
 {
-	if(button == GLUT_LEFT_BUTTON && state == GLUT_UP){ //left up
+	if(button == GLUT_LEFT_BUTTON && state == GLUT_UP && shift){ //left up shift
+		//cout << "LEFT DOWN\n";
+		cout << "LEFT UP SHIFT (" << x <<"," << y<< ")\n";
+		float x_pos = ((float)x*2.0/500.0)-1;
+		float y_pos = (((float)y*2.0/500.0)-1) * -1;
+		float size = 0.2;
+		drawables.push_back(new Square(vec3(x_pos-size, y_pos-size, 1), vec3(x_pos+size, y_pos-size, 1), vec3(x_pos+size, y_pos+size, 1), vec3(x_pos-size, y_pos+size, 1)));
+	}else if(button == GLUT_LEFT_BUTTON && state == GLUT_UP){ //left up
+		cout << GLUT_ACTIVE_SHIFT <<"SHIFT UP\n";
 		cout << "LEFT UP (" << x <<"," << y<< ")\n";
 		float x_pos = ((float)x*2.0/500.0)-1;
 		float y_pos = (((float)y*2.0/500.0)-1) * -1;
 		float size = 0.2;
 		drawables.push_back(new Square(vec4(1.0, 0.0, 0.0, 1.0), vec3(x_pos-size, y_pos-size, 1), vec3(x_pos+size, y_pos-size, 1), vec3(x_pos+size, y_pos+size, 1), vec3(x_pos-size, y_pos+size, 1)));
-	} else if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){ //left down
-		//cout << "LEFT DOWN\n";
+	} else if(button == GLUT_RIGHT_BUTTON && state == GLUT_UP && shift){ //left down
+		//cout << "RIGHT UP SHIFT\n";
+		cout << "RIGHT UP\n";
+		float x_pos = ((float)x*2.0/500.0)-1;
+		float y_pos = (((float)y*2.0/500.0)-1) * -1;
+		float size = 0.2;
+		drawables.push_back(new Triangle(vec3(x_pos-size*2, y_pos-size, 1), vec3(x_pos, y_pos+size, 1), vec3(x_pos+size*2, y_pos-size, 1)));
 	} else if(button == GLUT_RIGHT_BUTTON && state == GLUT_UP){ //right up
 		cout << "RIGHT UP\n";
 		float x_pos = ((float)x*2.0/500.0)-1;
 		float y_pos = (((float)y*2.0/500.0)-1) * -1;
 		float size = 0.2;
 		drawables.push_back(new Triangle(vec4(0.0, 0.0, 1.0, 1.0), vec3(x_pos-size*2, y_pos-size, 1), vec3(x_pos, y_pos+size, 1), vec3(x_pos+size*2, y_pos-size, 1)));
-	} else if(button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN){ //left down
-		//cout << "RIGHT DOWN\n";
-	}
+	} 
 }
 
 void timerCallback(int value)
-{
+{   
 	if(animate){
 		for (unsigned int i = 0; i < drawables.size(); i++){
 			drawables[i]->rotate();	
 		}	
 	}
-	glutTimerFunc(50, timerCallback, value);
+	glutTimerFunc(30, timerCallback, value);
 	glutPostRedisplay();
 }
 

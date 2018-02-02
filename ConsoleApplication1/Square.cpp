@@ -1,34 +1,37 @@
 #include "Square.h"
 
 Square::Square() {
-	vRgba = vec4(0.0, 0.0, 1.0, 1.0);
-	pos1 = vec3(0.25, 0.25, 1); 
-	pos2 = vec3(0.75, 0.25, 1);
-	pos3 = vec3(0.75, 0.75, 1);
-	pos4 = vec3(0.25, 0.75, 1);
-	theta = 0;
+	vec4 vRgba = vec4(0.0, 0.0, 1.0, 1.0);
+	vertices.push_back(Vertex(vec3(0.25, 0.25, 1),vRgba)); 
+	vertices.push_back(Vertex(vec3(0.75, 0.25, 1),vRgba));
+	vertices.push_back(Vertex(vec3(0.75, 0.75, 1),vRgba));
+	vertices.push_back(Vertex(vec3(0.25, 0.75, 1),vRgba));
 	init();
 }
 
 Square::Square(vec4 _rgba) {
-	vRgba = _rgba;
-	pos1 = vec3(0.25, 0.25, 1); 
-	pos2 = vec3(0.75, 0.25, 1);
-	pos3 = vec3(0.75, 0.75, 1);
-	pos4 = vec3(0.25, 0.75, 1);
-	theta = 0;
+	vertices.push_back(Vertex(vec3(0.25, 0.25, 1),_rgba)); 
+	vertices.push_back(Vertex(vec3(0.75, 0.25, 1),_rgba));
+	vertices.push_back(Vertex(vec3(0.75, 0.75, 1),_rgba));
+	vertices.push_back(Vertex(vec3(0.25, 0.75, 1),_rgba));
 	init();
 }
 
 Square::Square(vec4 _rgba, vec3 _pos1, vec3 _pos2, vec3 _pos3, vec3 _pos4){
-	vRgba = _rgba;
-	pos1 = _pos1; 
-	pos2 = _pos2;
-	pos3 = _pos3;
-	pos4 = _pos4;
-	theta = 0;
+	vertices.push_back(Vertex(_pos1,_rgba));
+	vertices.push_back(Vertex(_pos2,_rgba));
+	vertices.push_back(Vertex(_pos3,_rgba));
+	vertices.push_back(Vertex(_pos4,_rgba));
 	init();
 	
+}
+
+Square::Square(vec3 _pos1, vec3 _pos2, vec3 _pos3, vec3 _pos4){
+	vertices.push_back(Vertex(_pos1,randColor()));
+	vertices.push_back(Vertex(_pos2,randColor()));
+	vertices.push_back(Vertex(_pos3,randColor()));
+	vertices.push_back(Vertex(_pos4,randColor()));
+	init();
 }
 
 
@@ -38,6 +41,7 @@ Square::~Square() {
 }
 
 void Square::init(){
+	theta = 0;
 	//get a vertex buffer and a vertex array object
 	glGenBuffers(1, &VBO);
 	glGenVertexArrays(1, &VAO);
@@ -49,10 +53,7 @@ void Square::init(){
 	// Vertices of a unit cube centered at origin, sides aligned with axes
 	
 
-	vertices.push_back(Vertex(pos1,vRgba)); //red
-	vertices.push_back(Vertex(pos2,vRgba)); //red
-	vertices.push_back(Vertex(pos3,vRgba)); //red
-	vertices.push_back(Vertex(pos4,vRgba)); //red
+	
 
 	//cout << "SIZE OF Square" << sizeof(points) << "\n";
 	//put the data on the VBO
@@ -90,12 +91,20 @@ void Square::draw(Camera cam, vector<Light> lights){
 	float c = cos(rangle);
 	float s = sin(rangle);
 
+	mat3 it = mat3( vec3(1, 0, (vertices[0].position.x + vertices[2].position.x)/-2),
+					   vec3(0, 1, (vertices[0].position.y + vertices[2].position.y)/-2),
+					   vec3(0, 0, 1));
+	
 	mat3 rot = mat3( vec3(c, -s, 0),
 					 vec3(s, c, 0),
 					 vec3(0, 0, 1));
 
+	assert((inverse_trans = glGetUniformLocation(program, "inverse_trans"))!=-1);
+	glUniformMatrix3fv(inverse_trans,1, GL_TRUE,it);
+
 	assert((model_matrix = glGetUniformLocation(program, "model_matrix"))!=-1);
 	glUniformMatrix3fv(model_matrix,1, GL_TRUE,rot);
+
 
 	//unfortunately, every time we draw we still need to set again all uniform variables
 	//vec4 rgba = vec4(0.0, 0.0, 1.0, 1.0);// RGBA colors
@@ -110,33 +119,17 @@ void Square::draw(Camera cam, vector<Light> lights){
 void Square::rotate(){
 	
 
-	cout << "THETA:" << theta << "\n";
 	theta+=1;
 	if(theta > 360) theta = 0;
 
 	float rangle = theta*2.0*3.14 / 360;
 	float c = cos(rangle);
 	float s = sin(rangle);
-	mat3 itrans = mat3( vec3(1, 0, (vertices[0].position.x + vertices[2].position.x)/-2),
-					   vec3(0, 1, (vertices[0].position.y + vertices[2].position.y)/-2),
-					   vec3(0, 0, 1));
-
-	mat3 rot = mat3( vec3(c, -s, 0),
-					 vec3(s, c, 0),
-					 vec3(0, 0, 1));
-
-	mat3 trans = mat3( vec3(1, 0, (vertices[0].position.x + vertices[2].position.x)/2),
-					   vec3(0, 1, (vertices[0].position.y + vertices[2].position.y)/2),
-					   vec3(0, 0, 1));
 
 	vector<Vertex> verts = vertices;
 
-	assert((model_matrix = glGetUniformLocation(program, "model_matrix"))!=-1);
-	glUniformMatrix3fv(model_matrix,1, GL_TRUE,rot);
-
 	for (unsigned int i = 0; i < NumVertices; i++){
 		verts[i].color = verts[i].color * abs(c);
-		//verts[i].position = trans*rot*itrans*verts[i].position;
 	}
 	//put the data on the VBO
 
@@ -147,4 +140,11 @@ void Square::rotate(){
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 4, &verts[0], GL_DYNAMIC_DRAW);
 
 	//glDrawArrays(GL_TRIANGLE_FAN, 0, NumVertices);
+}
+
+vec4 Square::randColor(){
+	float r = ((float) rand() / (RAND_MAX));
+	float g = ((float) rand() / (RAND_MAX));
+	float b = ((float) rand() / (RAND_MAX));
+	return vec4(r,g,b,1.0);
 }

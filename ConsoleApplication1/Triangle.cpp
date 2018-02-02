@@ -1,28 +1,35 @@
 #include "Triangle.h"
 
 Triangle::Triangle() {
-	vRgba = vec4(0.0, 0.0, 1.0, 1.0);
-	pos1 = vec3(-1, -1, 1); 
-	pos2 = vec3(0, -1, 1);
-	pos3 = vec3(0, 0, 1);
+	vec4 vRgba = vec4(0.0, 0.0, 1.0, 1.0);
+	vertices.push_back(Vertex(vec3(0.25, 0.25, 1),vRgba)); 
+	vertices.push_back(Vertex(vec3(0.75, 0.25, 1),vRgba));
+	vertices.push_back(Vertex(vec3(0.75, 0.75, 1),vRgba));
+	vertices.push_back(Vertex(vec3(0.25, 0.75, 1),vRgba));
 	init();
 }
 
 Triangle::Triangle(vec4 _rgba) {
-	vRgba = _rgba;
-	pos1 = vec3(-1, -1, 1); 
-	pos2 = vec3(0, -1, 1);
-	pos3 = vec3(0, 0, 1);
+	vertices.push_back(Vertex(vec3(0.25, 0.25, 1),_rgba)); 
+	vertices.push_back(Vertex(vec3(0.75, 0.25, 1),_rgba));
+	vertices.push_back(Vertex(vec3(0.75, 0.75, 1),_rgba));
+	vertices.push_back(Vertex(vec3(0.25, 0.75, 1),_rgba));
 	init();
 }
 
 Triangle::Triangle(vec4 _rgba, vec3 _pos1, vec3 _pos2, vec3 _pos3){
-	vRgba = _rgba;
-	pos1 = _pos1; 
-	pos2 = _pos2;
-	pos3 = _pos3;
+	vertices.push_back(Vertex(_pos1,_rgba));
+	vertices.push_back(Vertex(_pos2,_rgba));
+	vertices.push_back(Vertex(_pos3,_rgba));
 	init();
 	
+}
+
+Triangle::Triangle(vec3 _pos1, vec3 _pos2, vec3 _pos3){
+	vertices.push_back(Vertex(_pos1,randColor()));
+	vertices.push_back(Vertex(_pos2,randColor()));
+	vertices.push_back(Vertex(_pos3,randColor()));
+	init();
 }
 
 
@@ -32,6 +39,7 @@ Triangle::~Triangle() {
 }
 
 void Triangle::init(){
+	theta = 0;
 	//get a vertex buffer and a vertex array object
 	glGenBuffers(1, &VBO);
 	glGenVertexArrays(1, &VAO);
@@ -77,6 +85,25 @@ void Triangle::draw(Camera cam, vector<Light> lights){
 	//and the attributes links to the shader
 	glBindVertexArray(VAO); 
 	glUseProgram(program);  //also switch to using this shader program
+	
+	float rangle = theta*2.0*3.14 / 360;
+	float c = cos(rangle);
+	float s = sin(rangle);
+
+	mat3 it = mat3( vec3(1, 0, (vertices[0].position.x + vertices[2].position.x)/-2),
+					   vec3(0, 1, (vertices[0].position.y + vertices[1].position.y)/-2),
+					   vec3(0, 0, 1));
+
+	mat3 rot = mat3( vec3(c, -s, 0),
+					 vec3(s, c, 0),
+					 vec3(0, 0, 1));
+
+	assert((inverse_trans = glGetUniformLocation(program, "inverse_trans"))!=-1);
+	glUniformMatrix3fv(inverse_trans,1, GL_TRUE,it);
+
+	assert((model_matrix = glGetUniformLocation(program, "model_matrix"))!=-1);
+	glUniformMatrix3fv(model_matrix,1, GL_TRUE,rot);
+
 
 	//unfortunately, every time we draw we still need to set again all uniform variables
 	//vec4 rgba = vec4(0.0, 0.0, 1.0, 1.0);// RGBA colors
@@ -90,30 +117,18 @@ void Triangle::draw(Camera cam, vector<Light> lights){
 
 void Triangle::rotate(){
 	
-
-	cout << "THETA:" << theta << "\n";
-	theta++;
+	theta+=1;
 	if(theta > 360) theta = 0;
 
 	float rangle = theta*2.0*3.14 / 360;
 	float c = cos(rangle);
 	float s = sin(rangle);
-	mat3 itrans = mat3( vec3(1, 0, (vertices[0].position.x + vertices[2].position.x)/-2),
-					   vec3(0, 1, (vertices[0].position.y + vertices[1].position.y)/-2),
-					   vec3(0, 0, 1));
-
-	mat3 rot = mat3( vec3(c, -s, 0),
-					 vec3(s, c, 0),
-					 vec3(0, 0, 1));
-
-	mat3 trans = mat3( vec3(1, 0, (vertices[0].position.x + vertices[2].position.x)/2),
-					   vec3(0, 1, (vertices[0].position.y + vertices[1].position.y)/2),
-					   vec3(0, 0, 1));
 
 	vector<Vertex> verts = vertices;
 
-	for (unsigned int i = 0; i < NumVertices; i++)
-	verts[i].position = trans*rot*itrans*verts[i].position;
+	for (unsigned int i = 0; i < NumVertices; i++){
+		verts[i].color = verts[i].color * abs(c);
+	}
 	//put the data on the VBO
 
 	glBindVertexArray(VAO);
@@ -123,5 +138,12 @@ void Triangle::rotate(){
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 4, &verts[0], GL_DYNAMIC_DRAW);
 
 	//glDrawArrays(GL_TRIANGLE_FAN, 0, NumVertices);
+}
+
+vec4 Triangle::randColor(){
+	float r = ((float) rand() / (RAND_MAX));
+	float g = ((float) rand() / (RAND_MAX));
+	float b = ((float) rand() / (RAND_MAX));
+	return vec4(r,g,b,1.0);
 }
 
