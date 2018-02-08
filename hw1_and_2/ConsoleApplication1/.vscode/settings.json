@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "istream": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "xlocnum": "cpp"
+    }
+}
