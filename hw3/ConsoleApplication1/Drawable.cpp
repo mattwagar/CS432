@@ -1,6 +1,7 @@
 #include "Drawable.h"
 Drawable::~Drawable() {
 	glDeleteBuffers(1, &VBO);  //delete the buffers (free up space on GPU)
+	glDeleteBuffers(1, &VIO);  //delete the buffers (free up space on GPU)
 	glDeleteVertexArrays(1, &VAO);  //delete the VAOss (free up space on GPU)
 }
 

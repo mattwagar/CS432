@@ -22,16 +22,17 @@ public:
 private:
 	void buildCube();
 	void makeQuad(int, int, int, int);
+	void makeQuad(int ind1, int ind2, int ind3, int ind4, vec4 color);
 	GLuint vPosition;
 	GLuint vColor;
 	GLuint mmLoc;
 
 	unsigned int index;
 
-	vec4 vertices[8];
-	vec4 potentialColors[8];
+	vec4 vertices[12];
+	//vec4 potentialColors[12];
 
-	vec4 points[6 * 2 * 3]; //6 faces, 2 triangles/face, 3 vertices per triangle
-	vec4 colors[6 * 2 * 3];
+	vec4 points[10 * 2 * 3]; //6 faces, 2 triangles/face, 3 vertices per triangle
+	vec4 colors[10 * 2 * 3];
 };
 #endif

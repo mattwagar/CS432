@@ -14,29 +14,29 @@
     <ClInclude Include="Angel.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CheckError.h" />
-    <ClInclude Include="Cube.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="mat.h" />
-    <ClInclude Include="Polyhedron.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="vec.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="InitShader.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Polyhedron.cpp" />
+    <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fshader00_v150.glsl" />
+    <None Include="fshader01_v150.glsl" />
     <None Include="vshader00_v150.glsl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7345FE22-58E1-446F-918F-6F93526C6BA6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ConsoleApplication1</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

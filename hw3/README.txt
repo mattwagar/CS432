@@ -13,8 +13,5 @@ How to run:
 (make sure your IDE is configured for glew/freeglut)
 
 
-Notes: I DID THE EXTRA CREDIT <3. 
-
-Also For some reason my program starts black until you click into it. Not sure why. 
-Otherwise works perfectly
+Notes: I ran into a weird bug when I loaded it with cube. It works best if you just load Icosahedron alone.
 

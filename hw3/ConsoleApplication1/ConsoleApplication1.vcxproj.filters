@@ -24,9 +24,6 @@
     <ClInclude Include="CheckError.h">
       <Filter>Resource Files\Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Resource Files\Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Drawable.h">
       <Filter>Resource Files\Source Files</Filter>
     </ClInclude>
@@ -39,15 +36,12 @@
     <ClInclude Include="vec.h">
       <Filter>Resource Files\Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Polyhedron.h">
+    <ClInclude Include="Sphere.h">
       <Filter>Resource Files\Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp">
-      <Filter>Resource Files\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cube.cpp">
       <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Drawable.cpp">
@@ -59,7 +53,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Polyhedron.cpp">
+    <ClCompile Include="Sphere.cpp">
       <Filter>Resource Files\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,6 +62,9 @@
       <Filter>Resource Files\Source Files</Filter>
     </None>
     <None Include="vshader00_v150.glsl">
+      <Filter>Resource Files\Source Files</Filter>
+    </None>
+    <None Include="fshader01_v150.glsl">
       <Filter>Resource Files\Source Files</Filter>
     </None>
   </ItemGroup>

@@ -13,6 +13,7 @@ protected:
 	GLuint program;
 	GLuint VAO;
 	GLuint VBO;
+	GLuint VIO;
 	mat4 modelmatrix;
 
 public:
